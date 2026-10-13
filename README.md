@@ -6,7 +6,7 @@
 
 > **Privacy:** tutto avviene sul dispositivo di chi la usa. I PDF non vengono mai inviati a un server: chi pubblica l'app fornisce solo il file dell'applicazione, non riceve i documenti.
 
-Autore: **Francesco Impallari** – Istituto di Biofisica del Consiglio Nazionale delle Ricerche (IBF-CNR) – francesco.impallari@cnr.it
+Autore: **Francesco Impallari** – Consiglio Nazionale delle Ricerche (CNR) – francesco.impallari@cnr.it
 
 ---
 
@@ -28,13 +28,21 @@ I file si possono anche **trascinare** nella finestra: se non c'è un documento 
 | Strumento | Tasto | Descrizione |
 |---|---|---|
 | Seleziona | V | Seleziona, sposta (anche con la «manina»), ridimensiona, ruota ed elimina gli elementi aggiunti |
-| Testo | T | Testo con 16 caratteri, dimensione, colore, grassetto, corsivo, sottolineato, barrato, rotazione |
+| Testo | T | Testo con 16 caratteri (più quelli caricati dall'utente), dimensione, colore, grassetto, corsivo, sottolineato, barrato, rotazione |
 | Firma | F | Firma disegnata, scritta in stile calligrafico o caricata da immagine (sfondo bianco rimosso); le firme si possono memorizzare |
 | Penna | P | Tratto a mano libera |
 | Evidenzia | E | Evidenziatore semitrasparente |
 | Pennello | B | Pennello a colore pieno, spessore 4–60 pt |
 | Riquadro | R | Rettangolo con bordo colorato |
 | Copri | C | Riquadro pieno che nasconde il contenuto; prende automaticamente il colore dello sfondo |
+
+### Copia stile dal PDF
+Con il pulsante **«Copia stile»** (la T con il contagocce, nella barra del Testo) si passa il mouse sul documento: il testo sotto il puntatore viene evidenziato e un'etichetta mostra **nome del carattere e dimensione** (es. «Times-Bold · 18 pt»). Con un clic l'app copia **carattere, dimensione, grassetto/corsivo e colore** e li applica al nuovo testo o a quello selezionato.
+Se il carattere del PDF non è tra quelli disponibili, l'etichetta lo segnala e viene usato il più simile (con grazie, senza grazie o a spaziatura fissa).
+
+### Caratteri personali
+Dal menu **Carattere › «Carica un carattere dal computer…»** si possono aggiungere caratteri **TTF, OTF o WOFF** (anche più file insieme: normale, grassetto, corsivo, riconosciuti automaticamente). I caratteri caricati restano disponibili in quel browser, vengono riconosciuti da «Copia stile» e sono incorporati nel PDF salvato.
+Su Mac i file dei caratteri si trovano con **Libro Font › clic destro › Mostra nel Finder**. Prima di distribuire PDF con caratteri commerciali, verificare che la licenza ne consenta l'incorporamento.
 
 **Colori:** colori pronti, tavolozza con OK/Annulla, codice esadecimale, **contagocce con lente d'ingrandimento** (preleva il colore esatto dal documento) e accesso alla tavolozza di sistema.
 
@@ -68,7 +76,7 @@ L'applicazione è un unico documento **HTML5** con CSS e JavaScript incorporati 
 | **pdf-lib 1.17** | Creazione del PDF di uscita: copia delle pagine originali, disegno di testo, immagini e tracciati |
 | **@pdf-lib/fontkit 1.1** | Incorporamento dei caratteri (sottoinsieme dei glifi usati) nel PDF |
 | **16 caratteri WOFF** | Incorporati in base64; usati sia a schermo (FontFace API) sia nel PDF, così ciò che si vede coincide con il risultato |
-| **API del browser** | File API, Canvas 2D, Pointer Events, File System Access (`showSaveFilePicker`, `showDirectoryPicker`), EyeDropper, Clipboard, localStorage (solo per le firme salvate) |
+| **API del browser** | File API, Canvas 2D, Pointer Events, FontFace, File System Access (`showSaveFilePicker`, `showDirectoryPicker`), EyeDropper, Clipboard, localStorage (firme salvate), IndexedDB (caratteri caricati dall'utente) |
 
 I caratteri «come in Word» sono equivalenti liberi con le stesse metriche: Arimo (Arial), Tinos (Times New Roman), Cousine (Courier New), Carlito (Calibri), Caladea (Cambria), Gelasio (Georgia), EB Garamond (Garamond), Comic Neue (Comic Sans).
 
@@ -97,6 +105,8 @@ Ogni pagina è composta da due livelli sovrapposti:
 - **ZIP:** archivio creato dall'app stessa (formato *store*, CRC-32), senza librerie esterne.
 - **Copri automatico:** il colore viene calcolato campionando i pixel lungo il bordo esterno del riquadro e prendendo il colore più frequente.
 - **Contagocce:** lente 11×11 pixel ingrandita, con lettura del pixel centrale dal canvas della pagina; su Chrome/Edge si usa l'EyeDropper nativo del browser.
+- **Copia stile:** il testo del PDF viene letto con pdf.js (`getTextContent`): per l'elemento sotto il puntatore si ricavano posizione, dimensione (dalla matrice di trasformazione) e nome del carattere (dagli oggetti font di pdf.js, rimuovendo il prefisso di sottoinsieme «ABCDEF+»). Il nome viene confrontato con i caratteri caricati dall'utente e con una tabella di corrispondenze (Times → Times New Roman, Helvetica → Arial, Calibri, Cambria…); grassetto e corsivo si deducono dal nome; il colore si ricava dai pixel più «pieni» delle lettere sul canvas.
+- **Caratteri dell'utente:** i file vengono letti con fontkit (famiglia e stile), registrati con la FontFace API per la visualizzazione e salvati in IndexedDB; in esportazione vengono incorporati nel PDF come gli altri caratteri.
 - **Inserimento in un'altra pagina:** se l'app è aperta dentro un *iframe* dello stesso sito, si ridimensiona da sola e mostra un pulsante «Tutto schermo».
 
 ---
@@ -110,7 +120,8 @@ Ogni pagina è composta da due livelli sovrapposti:
 - Il testo originale del PDF non si modifica: si può coprire e riscrivere.
 - La firma è un'immagine, non una firma digitale qualificata.
 - I PDF protetti da password di apertura non possono essere aperti.
-- I caratteri coprono l'alfabeto latino dell'Europa occidentale (italiano, €).
+- I caratteri incorporati coprono l'alfabeto latino dell'Europa occidentale (italiano, €); per altre lingue si può caricare un carattere personale.
+- «Copia stile» non funziona sui PDF da scansione (il testo è un'immagine).
 
 ## 5. Contenuto del repository
 | File | Contenuto |
