@@ -6,7 +6,7 @@
 
 > **Privacy:** tutto avviene sul dispositivo di chi la usa. I PDF non vengono mai inviati a un server: chi pubblica l'app fornisce solo il file dell'applicazione, non riceve i documenti.
 
-Autore: **Francesco Impallari** – Consiglio Nazionale delle Ricerche (CNR) – francesco.impallari@cnr.it
+Autore: **Francesco Impallari** – Istituto di Biofisica del Consiglio Nazionale delle Ricerche (IBF-CNR) – francesco.impallari@cnr.it
 
 ---
 
