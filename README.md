@@ -40,10 +40,6 @@ I file si possono anche **trascinare** nella finestra: se non c'è un documento 
 Con il pulsante **«Copia stile»** (la T con il contagocce, nella barra del Testo) si passa il mouse sul documento: il testo sotto il puntatore viene evidenziato e un'etichetta mostra **nome del carattere e dimensione** (es. «Times-Bold · 18 pt»). Con un clic l'app copia **carattere, dimensione, grassetto/corsivo e colore** e li applica al nuovo testo o a quello selezionato.
 Se il carattere del PDF non è tra quelli disponibili, l'etichetta lo segnala e viene usato il più simile (con grazie, senza grazie o a spaziatura fissa).
 
-### Caratteri personali
-Dal menu **Carattere › «Carica un carattere dal computer…»** si possono aggiungere caratteri **TTF, OTF o WOFF** (anche più file insieme: normale, grassetto, corsivo, riconosciuti automaticamente). I caratteri caricati restano disponibili in quel browser, vengono riconosciuti da «Copia stile» e sono incorporati nel PDF salvato.
-Su Mac i file dei caratteri si trovano con **Libro Font › clic destro › Mostra nel Finder**. Prima di distribuire PDF con caratteri commerciali, verificare che la licenza ne consenta l'incorporamento.
-
 **Colori:** colori pronti, tavolozza con OK/Annulla, codice esadecimale, **contagocce con lente d'ingrandimento** (preleva il colore esatto dal documento) e accesso alla tavolozza di sistema.
 
 **Spostamento preciso:** guide di allineamento automatiche durante il trascinamento (⌥ per disattivarle), frecce della tastiera per spostare di 1 pt (Maiusc: 10 pt).
