@@ -2,6 +2,8 @@
 
 **Scrivania PDF** è un'applicazione web gratuita per modificare documenti PDF direttamente nel browser: firmare, aggiungere testo, evidenziare, coprire parti del documento, gestire le pagine, unire e dividere PDF. È un unico file HTML che funziona su computer e smartphone, anche senza connessione a Internet.
 
+### Usala subito: **https://frimpa.github.io/scrivaniaPDF/**
+
 > **Privacy:** tutto avviene sul dispositivo di chi la usa. I PDF non vengono mai inviati a un server: chi pubblica l'app fornisce solo il file dell'applicazione, non riceve i documenti.
 
 Autore: **Francesco Impallari** – Consiglio Nazionale delle Ricerche (CNR) – francesco.impallari@cnr.it
